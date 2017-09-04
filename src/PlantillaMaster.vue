@@ -3,10 +3,10 @@
 	<ul v-if = "plantillas"  class="list-group">
 	<p>Seleccione una plantilla para editarla o cree una nueva plantilla</p>
 	<p><input type="button" name="crear" value="Nueva Plantilla" v-on:click = "showDetail"/></p>
-	<a href="#" class="list-group-item row col-md-4" v-for= "entrada in entradas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">Plantilla Tipo: {{plantilla.Tipo}}</a>
+	<a href="#" class="list-group-item row col-md-4" v-for= "plantilla in plantillas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">Plantilla Tipo: {{plantilla.Tipo}}</a>
 	</ul> 
 	<div v-else>
-	<p>No hay plantilas disponibles cree una nueva plantilla</p>
+	<p>No hay plantillas disponibles cree una nueva plantilla</p>
 	<p><input type="button" name="crear" value="Nueva Plantilla" v-on:click = "showDetail"/></p>
 	</div>
 	<div id="detail"></div>
@@ -16,6 +16,7 @@
 <script>
 import axios from 'axios'
 import Vue from 'vue'
+import PlantillaDetail from './PlantillaDetail.vue'
 import {EventBus} from './EventBus.js'
 export default{
 	name: 'master',
@@ -41,11 +42,11 @@ export default{
 		showDetail: function(event){
 			let plantilla = this.devuelvePlantilla(event.target.id)
 			new Vue({
-				el: '#detalle',
+				el: '#detail',
 				data:{
 					plantilla:plantilla
 				},
-				render: h => h(DetalleEntrada)
+				render: h => h(PlantillaDetail)
 			})
 		},
 		devuelvePlantilla: function(id){
