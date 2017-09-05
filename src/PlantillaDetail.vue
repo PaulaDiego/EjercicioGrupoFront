@@ -7,7 +7,8 @@
 			<input type="hidden" id="id" v-model:value="plantilla.Id"/>
 			<p><label for="tipo">Tipo: </label><input type="text" required id="sala" v-model:value="plantilla.Tipo"/></p>
 			<p><label for="descripcion">Descripción: </label><textarea required id="butaca" v-model:value="plantilla.Descripcion" rows="5" cols="20"></textarea></p>
-			<p><label for="fechaCreacion">Fecha de creacion: </label><input type="date" required id="fila" v-model.date:value="this.plantilla.FechaCreacion"/></p>
+
+			<p v-if="plantilla.FechaCreacion"><label for="fechaCreacion">Fecha de creacion: </label><input type="date" required id="fila" v-model:value="this.plantilla.FechaCreacion.toString().split('T')[0]" readonly/></p>
 			<p>
 				<input type ="button" name="aceptar" value="Aceptar"  v-on:click="aceptar"/>
 				<input v-if="plantilla.Id" type ="button" name="eliminar" value="Eliminar" v-on:click="eliminar"/>
@@ -33,13 +34,12 @@ export default {
 	created() {
 		if(this.$parent.plantilla != undefined){
 			this.plantilla = this.$parent.plantilla
-			this.plantilla.FechaCreacion = this.plantilla.FechaCreacion.toString().split('T')[0]
 		}else{
 			this.plantilla = {
 				Id:null,
 				Tipo:"",
 				Descripcion:"",
-				FechaCreacion:null
+				FechaCreacion:""
 			}
 		}
 	},
@@ -58,10 +58,9 @@ export default {
 			
 		},
 		aceptar: function(){
-			console.log(this.plantilla)
-			this.plantilla.FechaCreacion = new Date(this.plantilla.FechaCreacion).toISOString()
 			if(this.plantilla.Id==null || this.plantilla.Id==0){
 				this.plantilla.Id = 0
+				this.plantilla.FechaCreacion= new Date()
 				axios.post('http://10.60.23.11:50514/api/Plantillas',this.plantilla)
 				.then(
 					(plantilla)=>{
@@ -84,12 +83,10 @@ export default {
 				})
 			}
 			console.log(this.plantilla)
-			this.plantilla.FechaCreacion = this.plantilla.FechaCreacion.toString().split('T')[0]
 		},
 		cerrarDetalle:function(){
 			this.active = false
 		}
 	}
-
 }
 </script>
