@@ -6,8 +6,8 @@
 			<h3 v-else>Nueva Plantilla</h3>
 			<input type="hidden" id="id" v-model:value="plantilla.Id"/>
 			<p><label for="tipo">Tipo: </label><input type="text" required id="sala" v-model:value="plantilla.Tipo"/></p>
-			<p><label for="descripcion">Descripción: </label><input type="text" required id="butaca" v-model:value="plantilla.Descripcion"/></p>
-			<p><label for="fechaCreacion">Fecha de creacion: </label><input type="date" required id="fila" v-model:value="plantilla.FechaCreacion"/></p>
+			<p><label for="descripcion">Descripción: </label><textarea required id="butaca" v-model:value="plantilla.Descripcion" rows="5" cols="20"></textarea></p>
+			<p><label for="fechaCreacion">Fecha de creacion: </label><input type="date" required id="fila" v-model.date:value="this.plantilla.FechaCreacion"/></p>
 			<p>
 				<input type ="button" name="aceptar" value="Aceptar"  v-on:click="aceptar"/>
 				<input v-if="plantilla.Id" type ="button" name="eliminar" value="Eliminar" v-on:click="eliminar"/>
@@ -33,7 +33,7 @@ export default {
 	created() {
 		if(this.$parent.plantilla != undefined){
 			this.plantilla = this.$parent.plantilla
-			
+			this.plantilla.FechaCreacion = this.plantilla.FechaCreacion.toString().split('T')[0]
 		}else{
 			this.plantilla = {
 				Id:null,
@@ -45,7 +45,7 @@ export default {
 	},
 	methods: {
 		eliminar: function(){
-			axios.delete('http://10.60.23.11:50514/Plantillas/'+this.plantilla.id)
+			axios.delete('http://10.60.23.11:50514/Plantillas/'+this.plantilla.Id)
 			 .then(result => {
 			 	this.plantilla = result.data
 			 	EventBus.$emit('cambiosPlantilla',this.plantilla)
@@ -58,8 +58,8 @@ export default {
 			
 		},
 		aceptar: function(){
+			console.log(this.plantilla)
 			this.plantilla.FechaCreacion = new Date(this.plantilla.FechaCreacion).toISOString()
-			console.log(this.plantilla.FechaCreacion)
 			if(this.plantilla.Id==null || this.plantilla.Id==0){
 				this.plantilla.Id = 0
 				axios.post('http://10.60.23.11:50514/api/Plantillas',this.plantilla)
@@ -83,7 +83,8 @@ export default {
 					alert("Error al actualizar la plantilla")
 				})
 			}
-			
+			console.log(this.plantilla)
+			this.plantilla.FechaCreacion = this.plantilla.FechaCreacion.toString().split('T')[0]
 		},
 		cerrarDetalle:function(){
 			this.active = false
