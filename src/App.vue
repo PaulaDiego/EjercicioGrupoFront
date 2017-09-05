@@ -29,7 +29,7 @@ export default {
               el: '#master',
               render: h => h(PlantillaMaster)
             })
-            this.tipodocSelected=false
+            this.tipoDocSelected=false
           break
         case "tipoDoc":
             this.tipoDocSelected=true
