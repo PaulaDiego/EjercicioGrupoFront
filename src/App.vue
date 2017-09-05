@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row center-block col-md-offset-2 col-md-10">
     <h1 id="plantilla" v-on:click="showMaster" class="col-spaced col-md-6 btn btn-secondary btn btn-md" v-bind:class="{ 'btn-success': plantillaSelected }">Plantillas</h1>
-    <h1 id="documento" v-on:click="showMaster" class="col-spaced col-md-6 btn btn-secondary btn btn-md" v-bind:class="{ 'btn-success': documentoSelected }">Tipos de Documento</h1>
+    <h1 id="documento" v-on:click="showMaster" class="col-spaced col-md-6 btn btn-secondary btn btn-md" v-bind:class="{ 'btn-success': tipoDocSelected }">Tipos de Documento</h1>
     <div id="master"></div>
   </div>
   
@@ -9,12 +9,13 @@
 <script>
 import Vue from 'vue'
 import PlantillaMaster from './PlantillaMaster.vue'
+import TipoDocMaster from './TipoDocMaster.vue'
 export default {
   name: 'app',
   data(){
     return {
-      plantillaSelected :false,
-      documentoSelected:false
+      plantillaSelected: false,
+      tipoDocSelected: false
     }
     
   },
@@ -28,14 +29,14 @@ export default {
               el: '#master',
               render: h => h(PlantillaMaster)
             })
-            this.documentoSelected=false
+            this.tipodocSelected=false
           break
-        case "documento":
-            this.documentoSelected=true
-            /*new Vue({
+        case "tipoDoc":
+            this.tipoDocSelected=true
+            new Vue({
               el: '#master',
-              render: h => h(DocumentoMaster)
-            })*/
+              render: h => h(TipoDocMaster)
+            })
             this.plantillaSelected=false
           break
       }
