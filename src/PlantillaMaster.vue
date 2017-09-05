@@ -3,7 +3,7 @@
 	<ul v-if = "plantillas"  class="list-group">
 	<p>Seleccione una plantilla para editarla o cree una nueva plantilla</p>
 	<p><input type="button" name="crear" value="Nueva Plantilla" v-on:click = "showDetail"/></p>
-	<a href="#" class="list-group-item row col-md-4" v-for= "entrada in entradas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">Plantilla Tipo: {{plantilla.Tipo}}</a>
+	<a href="#" class="list-group-item row col-md-4" v-for= "plantilla in plantillas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">Plantilla Tipo: {{plantilla.Tipo}}</a>
 	</ul> 
 	<div v-else>
 	<p>No hay plantilas disponibles cree una nueva plantilla</p>
@@ -33,7 +33,8 @@ export default{
 	},
 	methods: {
 		getAll: function(){
-			axios.get('http://10.60.23.11:50514/api/plantillas')
+			axios.get('http://10.60.23.26:50514/api/plantillas') // Ruben
+//			axios.get('http://10.60.23.11:50514/api/plantillas') // Paula
 			.then (result => {
 				this.plantillas = result.data;
 			})
