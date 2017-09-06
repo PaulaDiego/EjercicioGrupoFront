@@ -1,14 +1,10 @@
 <template>
 <div id="master" class="center-block">
-	<ul v-if = "plantillas"  class="list-group">
-	<p>Seleccione una plantilla para editarla o cree una nueva plantilla</p>
-	<p><input type="button" name="crear" value="Nueva Plantilla" v-on:click = "showDetail"/></p>
-	<a href="#" class="list-group-item row col-md-4" v-for= "plantilla in plantillas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">Plantilla Tipo: {{plantilla.Tipo}}</a>
+	<ul class="list-group">
+		<p>Seleccione una plantilla para editarla o cree una nueva.</p>
+		<p><input type="button" name="crear" value="Nueva Plantilla" class="btn btn-secondary" v-on:click = "showDetail"/></p>
+		<a href="#" class="list-group-item row col-md-4" v-for= "plantilla in plantillas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">{{plantilla.Tipo}}</a>
 	</ul> 
-	<div v-else>
-	<p>No hay plantillas disponibles cree una nueva plantilla</p>
-	<p><input type="button" name="crear" value="Nueva Plantilla" v-on:click = "showDetail"/></p>
-	</div>
 	<div id="detail"></div>
 </div>
 </template>
@@ -34,8 +30,7 @@ export default{
 	},
 	methods: {
 		getAll: function(){
-			axios.get('http://10.60.23.26:50514/api/plantillas') // Ruben
-			//axios.get('http://10.60.23.11:50514/api/plantillas') // Paula
+			axios.get(SERVER+'/api/Plantillas')
 			.then (result => {
 				this.plantillas = result.data;
 			})

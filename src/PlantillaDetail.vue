@@ -10,9 +10,10 @@
 
 			<p v-if="plantilla.FechaCreacion"><label for="fechaCreacion">Fecha de creacion: </label><input type="date" required id="fila" v-model:value="this.plantilla.FechaCreacion.toString().split('T')[0]" readonly/></p>
 			<p>
-				<input type ="button" name="aceptar" value="Aceptar"  v-on:click="aceptar"/>
-				<input v-if="plantilla.Id" type ="button" name="eliminar" value="Eliminar" v-on:click="eliminar"/>
-				<input v-else type ="button" name="cancelar" value="Cancelar" v-on:click="cerrarDetalle"/>
+				<input type ="button" name="aceptar" value="Aceptar" class="btn btn-success" v-on:click="aceptar"/>
+				<input type ="button" name="cancelar" value="Cancelar" class="btn btn-secondary" v-on:click="cerrarDetalle"/>
+				<input v-if="plantilla.Id" type ="button" name="eliminar" class="btn btn-danger"value="Eliminar" v-on:click="eliminar"/>
+				
 			</p>
 		</form>
 		
@@ -45,8 +46,7 @@ export default {
 	},
 	methods: {
 		eliminar: function(){
-			axios.delete('http://10.60.23.26:50514/api/Plantillas/'+this.plantilla.Id) //Ruben
-			//axios.delete('http://10.60.23.11:50514/api/Plantillas/'+this.plantilla.Id) //Paula
+			axios.delete(SERVER+'/api/Plantillas/'+this.plantilla.Id)
 			 .then(result => {
 			 	this.plantilla = result.data
 			 	EventBus.$emit('cambiosPlantilla',this.plantilla)
@@ -62,30 +62,28 @@ export default {
 			if(this.plantilla.Id==null || this.plantilla.Id==0){
 				this.plantilla.Id = 0
 				this.plantilla.FechaCreacion= new Date()
-				axios.post('http://10.60.23.26:50514/api/Plantillas',this.plantilla) //Ruben
-				//axios.post('http://10.60.23.11:50514/api/Plantillas',this.plantilla) //Paula
+				axios.post(SERVER + '/api/Plantillas',this.plantilla)
 				.then(
 					(plantilla)=>{
-					alert('Plantilla creada con exito')
 					this.plantilla.Id = plantilla.data.Id
 					EventBus.$emit('cambiosPlantilla',this.plantilla)
+					this.cerrarDetalle()
+
 				})
 				.catch(function(){
 					alert("Error al crear la plantilla")
 				})
 			}else{
-				axios.put('http://10.60.23.26:50514/api/TipoDocumento/'+this.plantilla.Id,this.plantilla) //Ruben
-				//axios.put('http://10.60.23.11:50514/api/Plantillas/'+this.plantilla.Id,this.plantilla) //Paula
+				axios.put(SERVER + '/api/Plantillas/'+this.plantilla.Id,this.plantilla)
 				.then(
 					()=>{
-						alert('Plantilla actualizada con exito')
 						EventBus.$emit('cambiosPlantilla',this.plantilla)
+						this.cerrarDetalle()
 				})
 				.catch(function(){
 					alert("Error al actualizar la plantilla")
 				})
 			}
-			console.log(this.plantilla)
 		},
 		cerrarDetalle:function(){
 			this.active = false
