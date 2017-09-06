@@ -45,7 +45,8 @@ export default {
 	},
 	methods: {
 		eliminar: function(){
-			axios.delete('http://10.60.23.11:50514/api/Plantillas/'+this.plantilla.Id)
+			//axios.delete('http://10.60.23.26:50514/api/Plantillas/'+this.plantilla.Id) //Ruben
+			axios.delete('http://10.60.23.11:50514/api/Plantillas/'+this.plantilla.Id) //Paula
 			 .then(result => {
 			 	this.plantilla = result.data
 			 	EventBus.$emit('cambiosPlantilla',this.plantilla)
@@ -61,7 +62,8 @@ export default {
 			if(this.plantilla.Id==null || this.plantilla.Id==0){
 				this.plantilla.Id = 0
 				this.plantilla.FechaCreacion= new Date()
-				axios.post('http://10.60.23.11:50514/api/Plantillas',this.plantilla)
+				//axios.post('http://10.60.23.26:50514/api/Plantillas',this.plantilla) //Ruben
+				axios.post('http://10.60.23.11:50514/api/Plantillas',this.plantilla) //Paula
 				.then(
 					(plantilla)=>{
 					alert('Plantilla creada con exito')
@@ -72,7 +74,8 @@ export default {
 					alert("Error al crear la plantilla")
 				})
 			}else{
-				axios.put('http://10.60.23.11:50514/api/Plantillas/'+this.plantilla.Id,this.plantilla)
+				//axios.put('http://10.60.23.26:50514/api/TipoDocumento/'+this.plantilla.Id,this.plantilla) //Ruben
+				axios.put('http://10.60.23.11:50514/api/Plantillas/'+this.plantilla.Id,this.plantilla) //Paula
 				.then(
 					()=>{
 						alert('Plantilla actualizada con exito')
