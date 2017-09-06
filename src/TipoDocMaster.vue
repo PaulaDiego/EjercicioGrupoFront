@@ -34,8 +34,8 @@ export default{
 	},
 	methods: {
 		getAll: function(){
-			//axios.get('http://10.60.23.26:50514/api/TipoDocumento') //Ruben
-			axios.get('http://10.60.23.11:50514/api/TipoDocumento') // Paula
+			axios.get(SERVER+'/api/TipoDocumento') //Ruben
+			//axios.get(SERVER+'http://10.60.23.11:50514/api/TipoDocumento') // Paula
 			.then (result => {
 				this.tiposDoc = result.data;
 			})

@@ -59,8 +59,8 @@ export default {
 	},
 	methods: {
 		eliminar: function(){
-			//axios.delete('http://10.60.23.26:50514/api/TipoDocumento/'+this.tipoDoc.Id) //Ruben
-			axios.delete('http://10.60.23.11:50514/api/TipoDocumento/'+this.tipoDoc.Id) //Paula
+			axios.delete('http://10.60.23.26:50514/api/TipoDocumento/'+this.tipoDoc.Id) //Ruben
+			//axios.delete('http://10.60.23.11:50514/api/TipoDocumento/'+this.tipoDoc.Id) //Paula
 				.then(
 					result => {
 						this.tipoDoc = result.data
@@ -75,8 +75,8 @@ export default {
 			let id = this.tipoDoc.Id
 			if(id == null){
 				this.tipoDoc.Id = 0
-				//axios.post('http://10.60.23.26:50514/api/TipoDocumento',this.tipoDoc) //Ruben
-				axios.post('http://10.60.23.11:50514/api/TipoDocumento',this.tipoDoc) //Paula
+				axios.post('http://10.60.23.26:50514/api/TipoDocumento',this.tipoDoc) //Ruben
+				//axios.post('http://10.60.23.11:50514/api/TipoDocumento',this.tipoDoc) //Paula
 				.then(
 					result => {
 						this.tipoDoc = result.data
@@ -87,8 +87,8 @@ export default {
 					alert("Error al crear el documento")
 				})
 			}else{
-				//axios.put('http://10.60.23.26:50514/api/TipoDocumento/'+this.tipoDoc.Id,this.tipoDoc) //Ruben
-				axios.put('http://10.60.23.11:50514/api/TipoDocumento/'+this.tipoDoc.Id,this.tipoDoc) //Paula
+				axios.put('http://10.60.23.26:50514/api/TipoDocumento/'+this.tipoDoc.Id,this.tipoDoc) //Ruben
+				//axios.put('http://10.60.23.11:50514/api/TipoDocumento/'+this.tipoDoc.Id,this.tipoDoc) //Paula
 				.then(
 					result => {
 						this.tipoDoc = result.data

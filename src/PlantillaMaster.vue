@@ -34,8 +34,8 @@ export default{
 	},
 	methods: {
 		getAll: function(){
-//			axios.get('http://10.60.23.26:50514/api/plantillas') // Ruben
-			axios.get('http://10.60.23.11:50514/api/plantillas') // Paula
+			axios.get('http://10.60.23.26:50514/api/plantillas') // Ruben
+			//axios.get('http://10.60.23.11:50514/api/plantillas') // Paula
 			.then (result => {
 				this.plantillas = result.data;
 			})
