@@ -3,7 +3,7 @@
 	<ul class="list-group">
 		<p>Seleccione un Tipo de Documento para editarlo o cree uno nuevo.</p>
 		<p><input type="button" name="crear" value="Nuevo Tipo Documento" class="btn btn-secondary" v-on:click = "showDetail"/></p>
-		<a href="#" class="list-group-item row col-md-4" v-for= "tipoDoc in tiposDoc" v-on:click= "showDetail" id="tipoDoc.Id" v-bind:id = "tipoDoc.Id">Tipo Documento: {{tipoDoc.Descripcion}}</a>
+		<a href="#" class="list-group-item row col-md-4" v-for= "tipoDoc in tiposDoc" v-on:click= "showDetail" id="tipoDoc.Id" v-bind:id = "tipoDoc.Id">{{tipoDoc.Descripcion}}</a>
 	</ul> 
 	<div id="detail"></div>
 </div>

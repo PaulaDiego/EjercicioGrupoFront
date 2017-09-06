@@ -3,7 +3,7 @@
 	<ul class="list-group">
 		<p>Seleccione una plantilla para editarla o cree una nueva.</p>
 		<p><input type="button" name="crear" value="Nueva Plantilla" class="btn btn-secondary" v-on:click = "showDetail"/></p>
-		<a href="#" class="list-group-item row col-md-4" v-for= "plantilla in plantillas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">Plantilla Tipo: {{plantilla.Tipo}}</a>
+		<a href="#" class="list-group-item row col-md-4" v-for= "plantilla in plantillas" v-on:click= "showDetail" id="plantilla.Id" v-bind:id = "plantilla.Id">{{plantilla.Tipo}}</a>
 	</ul> 
 	<div id="detail"></div>
 </div>
