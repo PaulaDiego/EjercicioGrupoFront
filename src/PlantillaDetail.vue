@@ -45,7 +45,7 @@ export default {
 	},
 	methods: {
 		eliminar: function(){
-			axios.delete('http://10.60.23.11:50514/Plantillas/'+this.plantilla.Id)
+			axios.delete('http://10.60.23.11:50514/api/Plantillas/'+this.plantilla.Id)
 			 .then(result => {
 			 	this.plantilla = result.data
 			 	EventBus.$emit('cambiosPlantilla',this.plantilla)

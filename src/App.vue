@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row center-block col-md-offset-2 col-md-10">
     <h1 id="plantilla" v-on:click="showMaster" class="col-spaced col-md-6 btn btn-secondary btn btn-md" v-bind:class="{ 'btn-success': plantillaSelected }">Plantillas</h1>
-    <h1 id="documento" v-on:click="showMaster" class="col-spaced col-md-6 btn btn-secondary btn btn-md" v-bind:class="{ 'btn-success': tipoDocSelected }">Tipos de Documento</h1>
+    <h1 id="tipoDoc" v-on:click="showMaster" class="col-spaced col-md-6 btn btn-secondary btn btn-md" v-bind:class="{ 'btn-success': tipoDocSelected }">Tipos de Documento</h1>
     <div id="master"></div>
   </div>
   
