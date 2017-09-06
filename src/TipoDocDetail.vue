@@ -22,9 +22,10 @@
 		
 		
 		<p>
-			<input type ="button" name="aceptar" value="Aceptar"  v-on:click="aceptar"/>
-			<input v-if="tipoDoc.Id" type ="button" name="eliminar" value="Eliminar" v-on:click="eliminar"/>
-			<input v-else type ="button" name="cancelar" value="Cancelar" v-on:click="cerrarDetalle"/>
+			<input type ="button" name="aceptar" value="Aceptar"  class="btn btn-success" v-on:click="aceptar"/>
+			<input type ="button" name="cancelar" value="Cancelar" class="btn btn-secondary" v-on:click="cerrarDetalle"/>
+			<input v-if="tipoDoc.Id" type ="button" name="eliminar" value="Eliminar" class="btn btn-danger"v-on:click="eliminar"/>
+			
 		</p>
 			
 	</form>
@@ -59,13 +60,11 @@ export default {
 	},
 	methods: {
 		eliminar: function(){
-			//axios.delete('http://10.60.23.26:50514/api/TipoDocumento/'+this.tipoDoc.Id) //Ruben
-			axios.delete('http://10.60.23.11:50514/api/TipoDocumento/'+this.tipoDoc.Id) //Paula
+			axios.delete(SERVER+'/api/TipoDocumento/'+this.tipoDoc.Id)
 				.then(
 					result => {
 						this.tipoDoc = result.data
 						EventBus.$emit('cambiosTipoDoc',this.tipoDoc)
-						alert('Tipo de Documento eliminado')
 						this.cerrarDetalle()
 				}).catch(function(){
 					alert("Error al eliminar")
@@ -75,30 +74,26 @@ export default {
 			let id = this.tipoDoc.Id
 			if(id == null){
 				this.tipoDoc.Id = 0
-				//axios.post('http://10.60.23.26:50514/api/TipoDocumento',this.tipoDoc) //Ruben
-				axios.post('http://10.60.23.11:50514/api/TipoDocumento',this.tipoDoc) //Paula
+				axios.post(SERVER+'/api/TipoDocumento',this.tipoDoc)
 				.then(
 					result => {
 						this.tipoDoc = result.data
 						EventBus.$emit('cambiosTipoDoc',this.tipoDoc)
-						alert('Tipo de Documento creado con exito')
 						this.cerrarDetalle()
 				}).catch(function(){
 					alert("Error al crear el documento")
 				})
 			}else{
-				//axios.put('http://10.60.23.26:50514/api/TipoDocumento/'+this.tipoDoc.Id,this.tipoDoc) //Ruben
-				axios.put('http://10.60.23.11:50514/api/TipoDocumento/'+this.tipoDoc.Id,this.tipoDoc) //Paula
+				axios.put(SERVER + '/api/TipoDocumento/'+this.tipoDoc.Id,this.tipoDoc)
 				.then(
 					result => {
-						this.tipoDoc = result.data
 						EventBus.$emit('cambiosTipoDoc',this.tipoDoc)
-						alert('Tipo de Documento actualizado con exito')
 						this.cerrarDetalle()
 				}).catch(function(){
 					alert("Error al actualizar el documento")
 				})
 			}
+			
 		},
 		cerrarDetalle: function(){
 			this.active = false

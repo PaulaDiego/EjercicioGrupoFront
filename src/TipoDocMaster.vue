@@ -1,14 +1,10 @@
 <template>
 <div id="master" class="center-block">
-	<ul v-if = "tiposDoc"  class="list-group">
-	<p>Seleccione un Tipo de Documento para editarlo o cree uno nuevo</p>
-	<p><input type="button" name="crear" value="Nuevo Tipo Documento" v-on:click = "showDetail"/></p>
-	<a href="#" class="list-group-item row col-md-4" v-for= "tipoDoc in tiposDoc" v-on:click= "showDetail" id="tipoDoc.Id" v-bind:id = "tipoDoc.Id">Tipo Documento: {{tipoDoc.Descripcion}}</a>
+	<ul class="list-group">
+		<p>Seleccione un Tipo de Documento para editarlo o cree uno nuevo.</p>
+		<p><input type="button" name="crear" value="Nuevo Tipo Documento" class="btn btn-secondary" v-on:click = "showDetail"/></p>
+		<a href="#" class="list-group-item row col-md-4" v-for= "tipoDoc in tiposDoc" v-on:click= "showDetail" id="tipoDoc.Id" v-bind:id = "tipoDoc.Id">Tipo Documento: {{tipoDoc.Descripcion}}</a>
 	</ul> 
-	<div v-else>
-	<p>No hay tipos de documento disponibles cree uno nuevo</p>
-	<p><input type="button" name="crear" value="Nuevo Tipo Documento" v-on:click = "showDetail"/></p>
-	</div>
 	<div id="detail"></div>
 </div>
 </template>
@@ -34,8 +30,7 @@ export default{
 	},
 	methods: {
 		getAll: function(){
-			//axios.get('http://10.60.23.26:50514/api/TipoDocumento') //Ruben
-			axios.get('http://10.60.23.11:50514/api/TipoDocumento') // Paula
+			axios.get(SERVER+'/api/TipoDocumento') // Paula
 			.then (result => {
 				this.tiposDoc = result.data;
 			})
