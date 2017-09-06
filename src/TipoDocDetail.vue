@@ -20,6 +20,20 @@
 			<input type="text" required id="extension" v-model:value="tipoDoc.Extension"/>
 		</p>
 		
+		<p>
+			<label for="estructurado">Estructurado:</label>
+			<input type="checkbox" required id="estructurado" v-model:value="tipoDoc.Estructurado"/>
+		</p>
+		
+		<p>
+			<label for="editable">Editable:</label>
+			<input type="checkbox" required id="editable" v-model:value="tipoDoc.Editable"/>
+		</p>
+		
+		<p>
+			<label for="tamanio">Tama&ntilde;o:</label>
+			<input type="number" required id="tamanio" min="0" v-model:value="tipoDoc.Tamanio"/>
+		</p>
 		
 		<p>
 			<input type ="button" name="aceptar" value="Aceptar"  class="btn btn-success" v-on:click="aceptar"/>
@@ -54,7 +68,10 @@ export default {
 				Id: null,
 				Descripcion: "",
 				Mime:"",
-				Extension:""
+				Extension:"",
+				Estructurado: false,
+				Editable: false,
+				Tamanio: 0
 			}
 		}
 	},
