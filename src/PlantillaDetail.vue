@@ -7,7 +7,15 @@
 			<input type="hidden" id="id" v-model:value="plantilla.Id"/>
 			<p><label for="tipo">Tipo: </label><input type="text" required id="sala" v-model:value="plantilla.Tipo"/></p>
 			<p><label for="descripcion">Descripción: </label><textarea required id="butaca" v-model:value="plantilla.Descripcion" rows="5" cols="20"></textarea></p>
-
+			<p>
+				<label for="tipoUsuario">Tipo de usuario: </label>
+				<select v-model:value="plantilla.TipoUsuario" id="tipoUsuario" required>
+				  <option v-for="option in tiposUsuarios" v-bind:value="option.value">
+				    {{ option.text }}
+				  </option>
+				</select>
+			</p>
+			<p><label for="editable" class="checkbox-inline"><input type="checkbox" required id="editable" class="checkbox checkbox-primary" v-model:value="plantilla.Editable"/> Editable</label></p>
 			<p v-if="plantilla.FechaCreacion"><label for="fechaCreacion">Fecha de creacion: </label><input type="date" required id="fila" v-model:value="this.plantilla.FechaCreacion.toString().split('T')[0]" readonly/></p>
 			<p>
 				<input type ="button" name="aceptar" value="Aceptar" class="btn btn-success" v-on:click="aceptar"/>
@@ -28,7 +36,13 @@ export default {
 	data(){
 		return {
 			plantilla:this.plantilla,
-			active:true
+			active:true,
+			tiposUsuarios:[
+				{text:'Administrador',value:'Administrador'},
+				{text:'Editor',value:'Editor'},
+				{text:'Gestor',value:'Gestor'},
+				{text:'Usuario',value:'Usuario'}
+			]
 		}
 		
 	},
@@ -40,7 +54,9 @@ export default {
 				Id:null,
 				Tipo:"",
 				Descripcion:"",
-				FechaCreacion:""
+				FechaCreacion:"",
+				TipoUsuario:"",
+				Editable:false
 			}
 		}
 	},
